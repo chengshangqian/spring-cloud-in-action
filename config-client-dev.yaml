@@ -1,5 +1,5 @@
 # Web服务器配置
-server:
-  port: 6001
+#server:
+#  port: 6001
 
-version: V1
+version: V1.1

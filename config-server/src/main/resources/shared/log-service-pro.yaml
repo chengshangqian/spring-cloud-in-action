@@ -23,12 +23,19 @@ management:
       exposure:
         include: "*" # 曝露所有端点
 
-# feign配置：远程调用开启熔断功能，否则fallback指定的Mock无法启用
+# feign配置：远程调用开启熔断功能，否则fallback指定的Mock无法启用，另外需要注意首次调用超时问题
 feign:
   hystrix:
     enabled: true
 
-# hystrix配置：代理数据流的列表，否则无法连接上http://192.168.8.100:8030/actuator/hystrix.stream
+# hystrix配置
 hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 15000 # 调用超时时间默认1秒，设为15秒避免首次调用超时而熔断
+  # 代理数据流的列表，否则无法连接上http://192.168.8.100:8030/actuator/hystrix.stream
   dashboard:
     proxy-stream-allow-list: "*"

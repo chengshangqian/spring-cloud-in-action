@@ -14,6 +14,11 @@ spring:
 
   # cloud设置
   cloud:
+    # 负载均衡：关闭负载均衡器ribbon选项，解决一些警告
+    loadbalancer:
+      ribbon:
+        enabled: false
+    # 配置中心
     config:
       server:
         native: # 配置从本地读取配置

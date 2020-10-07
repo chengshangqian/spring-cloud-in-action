@@ -1,0 +1,32 @@
+# 服务器信息
+server:
+  address: 192.168.8.100
+  port: 2000
+
+# spring应用信息
+spring:
+  application:
+    name: eureka-server
+
+  # cloud设置
+  cloud:
+    # 负载均衡：关闭负载均衡器ribbon选项，因为ribbon也包含了负载均衡器，两个有冲突?
+    # 会导致无法调用或转发服务请求
+    loadbalancer:
+      ribbon:
+        enabled: false
+
+# eureka配置
+eureka:
+  instance:
+    hostname: ${server.address}  # 集群时使用
+  client:
+    register-with-eureka: false  # 否向将自身注册为服务
+    fetch-registry: false  # 是否能从eureka拉取注册信息
+    serviceUrl:  # 曝露注册中心地址。如果搭建集群，这里填写集群中其它eureka节点的地址，多个用逗号隔开
+      defaultZone: http://${server.address}:${server.port}/eureka
+
+# 日志配置
+logging:
+  level:
+    com.fandou.coffee.learning.springcloud.eureka: DEBUG

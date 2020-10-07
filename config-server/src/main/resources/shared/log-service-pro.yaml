@@ -1,0 +1,34 @@
+# spring应用信息
+spring:
+  # cloud设置
+  cloud:
+    # 负载均衡：关闭负载均衡器ribbon选项，因为ribbon也包含了负载均衡器，两个有冲突?
+    # 会导致无法调用或转发服务请求
+    loadbalancer:
+      ribbon:
+        enabled: false
+
+# actuator应用监控配置
+management:
+  # 配置端点
+  endpoint:
+    health:
+      show-details: ALWAYS # 健康信息端点显示详情
+    shutdown:
+      enabled: false # 关闭（默认）应用的端点
+
+  # 曝露端点
+  endpoints:
+    web:
+      exposure:
+        include: "*" # 曝露所有端点
+
+# feign配置：远程调用开启熔断功能，否则fallback指定的Mock无法启用
+feign:
+  hystrix:
+    enabled: true
+
+# hystrix配置：代理数据流的列表，否则无法连接上http://192.168.8.100:8030/actuator/hystrix.stream
+hystrix:
+  dashboard:
+    proxy-stream-allow-list: "*"

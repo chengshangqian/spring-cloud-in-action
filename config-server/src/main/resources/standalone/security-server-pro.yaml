@@ -1,0 +1,53 @@
+server:
+  address: 192.168.8.100
+  port: 4000
+
+spring:
+  application:
+    name: security-server
+
+  # 配置数据源
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://192.168.8.179:3306/vblog?useUnicode=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&characterEncoding=utf-8
+    username: coffee
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # cloud设置
+  cloud:
+    # 负载均衡：关闭负载均衡器ribbon选项，因为ribbon也包含了负载均衡器，两个有冲突?
+    # 会导致无法调用或转发服务请求
+    loadbalancer:
+      ribbon:
+        enabled: false
+
+# eureka配置
+eureka:
+  client:
+    serviceUrl:
+      # eureka-server服务注册中心地址，如果是集群，可以用逗号隔开
+      defaultZone: http://192.168.8.100:2000/eureka
+  instance:
+    hostname: ${server.address}
+    # 自定义注册到eureka中的服务实例instance-id，在eureka后台显示
+    instance-id: ${spring.application.name}:${server.address}:${server.port}
+
+# actuator应用监控配置
+management:
+  # 配置端点
+  endpoint:
+    health:
+      show-details: ALWAYS # 健康信息端点显示详情
+    shutdown:
+      enabled: false # 关闭（默认）应用的端点
+
+  # 曝露端点
+  endpoints:
+    web:
+      exposure:
+        include: "*" # 曝露所有端点
+
+logging:
+  level:
+    org.springframework.security: DEBUG

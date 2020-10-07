@@ -1,0 +1,36 @@
+# 服务器信息
+server:
+  address: 192.168.8.100
+  port: 5000
+
+# spring应用信息
+spring:
+  application:
+    name: monitor-admin-server
+  cloud:
+    config:
+      fail-fast: true # 开启快速失败策略
+      discovery: # 使用服务发现
+        enabled: true
+        serviceId: config-server
+  profiles:
+    active: pro
+
+# eureka注册中心配置
+eureka:
+  client:
+    registry-fetch-interval-seconds: 5
+    serviceUrl:
+      # eureka-server服务注册中心地址，如果是集群，可以用逗号隔开
+      defaultZone: http://192.168.8.100:2000/eureka
+  instance:
+    hostname: ${server.address}
+    lease-renewal-interval-in-seconds: 10
+    # 健康检查url
+    health-check-url-path: /actuator/health
+    # 定义注册到eureka中的服务实例instance-id，在eureka后台显示
+    instance-id: ${spring.application.name}:${server.address}:${server.port}
+    # SpringBootAdmin登录账号密码
+    metadata-map:
+      user.name: ${spring.security.user.name}
+      user.password: ${spring.security.user.password}

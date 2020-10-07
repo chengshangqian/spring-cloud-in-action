@@ -1,0 +1,29 @@
+# 服务器信息
+server:
+  address: 192.168.8.100
+  port: 8000
+
+# spring应用信息
+spring:
+  application:
+    name: user-service
+  cloud:
+    config:
+      fail-fast: true # 开启快速失败策略
+      discovery: # 使用服务发现
+        enabled: true
+        serviceId: config-server
+  profiles:
+    active: pro
+
+# eureka配置
+eureka:
+  client:
+    registry-fetch-interval-seconds: 5
+    serviceUrl:
+      defaultZone: http://192.168.8.100:2000/eureka
+  instance:
+    hostname: ${server.address}
+    instance-id: ${spring.application.name}:${server.address}:${server.port}
+    lease-renewal-interval-in-seconds: 10
+    health-check-url-path: /actuator/health

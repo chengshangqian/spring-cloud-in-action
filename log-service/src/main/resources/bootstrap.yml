@@ -19,8 +19,12 @@ spring:
 # eureka配置
 eureka:
   client:
+    registry-fetch-interval-seconds: 5 # 服务消费者配置：从注册中心拉取服务列表间隔时间，默认30秒，即每间隔30秒从注册中心拉去一次服务列表
     serviceUrl:
       defaultZone: http://192.168.8.100:2000/eureka
   instance:
     hostname: ${server.address}
     instance-id: ${spring.application.name}:${server.address}:${server.port}
+    lease-renewal-interval-in-seconds: 10 # 服务提供者配置：续约间隔时间，默认30秒，即每隔30秒想注册中心发起一次续约
+    lease-expiration-duration-in-seconds: 30 # 服务提供者配置：服务失效超时时间，默认90秒，即超时未续约（30秒未续约）后90秒，服务将从注册中心中剔除
+    health-check-url-path: /actuator/health

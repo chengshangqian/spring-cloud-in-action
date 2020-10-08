@@ -1,25 +1,28 @@
 # 服务器信息
 server:
-  address: 192.168.8.100
+  address: 192.168.8.115
   port: 4000
 
 # spring应用信息
 spring:
   application:
     name: security-server
-  cloud:
-    config:
-      fail-fast: true # 开启快速失败策略
-      discovery: # 使用服务发现
-        enabled: true
-        serviceId: config-server
+
+  #cloud:
+  # 启用配置中心
+  #    config:
+  #      fail-fast: true # 开启快速失败策略
+  #      discovery: # 使用服务发现
+  #        enabled: true
+  #        serviceId: config-server
+
   profiles:
-    active: pro
+    active: dev # 部署产品环境时使用配置中心的pro
 
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://192.168.8.100:2000/eureka
+      defaultZone: http://192.168.8.115:2000/eureka
   instance:
     hostname: ${server.address}
     instance-id: ${spring.application.name}:${server.address}:${server.port}

@@ -30,6 +30,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         .anyRequest().authenticated()
                 )
 
+                // 关闭httpBasic，否则服务注册和发现刷新不了
+                .httpBasic(httpSecurityHttpBasicConfigurer -> httpSecurityHttpBasicConfigurer.disable())
+
                 // 关闭CSRF
                 .csrf(csrfCustomizer -> csrfCustomizer.disable());
     }

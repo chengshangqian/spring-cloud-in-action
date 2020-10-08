@@ -60,12 +60,10 @@
         </dependency>
 
         <!-- config配置中心依赖起步：本地开发时先不启用 -->
-        <!--
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
-        -->
 
         <!-- 声明式远程调用openfeign起步依赖：内部引入了hystrix模块以及ribbon起步依赖 -->
         <dependency>

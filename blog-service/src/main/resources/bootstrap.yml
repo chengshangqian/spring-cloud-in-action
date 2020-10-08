@@ -8,16 +8,16 @@ spring:
   application:
     name: blog-service
 
-#  cloud:
-#    # 启用配置中心
-#    config:
-#      fail-fast: true # 开启快速失败策略
-#      discovery: # 使用服务发现
-#        enabled: true
-#        serviceId: config-server
+  # 启用配置中心
+  cloud:
+    config:
+      fail-fast: true # 开启快速失败策略
+      discovery: # 使用服务发现
+        enabled: true
+        serviceId: config-server
 
   profiles:
-    active: dev # 部署产品环境时使用配置中心的pro
+    active: pro # 部署产品环境时使用配置中心的pro
 
 # eureka配置
 eureka:

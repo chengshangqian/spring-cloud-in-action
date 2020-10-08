@@ -22,6 +22,7 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+        // 定义资源id
         resources.resourceId("user-service").tokenStore(tokenStore);
     }
 
@@ -36,7 +37,6 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
         http
                 // 认证授权规则
                 .authorizeRequests(authorizeRequestsCustomizer -> authorizeRequestsCustomizer
-                        //.anyRequest().permitAll()
                         // 认证登录、应用监控等不需要认证
                         .antMatchers("/authorize").permitAll()
                         .antMatchers("/actuator/**").permitAll()

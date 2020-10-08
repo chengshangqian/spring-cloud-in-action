@@ -1,0 +1,33 @@
+# spring应用信息
+spring:
+  # security安全配置
+  security:
+    user:
+      name: admin
+      password: 123456
+  # cloud设置
+  cloud:
+    # 负载均衡：关闭负载均衡器ribbon选项，因为ribbon也包含了负载均衡器，两个有冲突?
+    # 会导致无法调用或转发服务请求
+    loadbalancer:
+      ribbon:
+        enabled: false
+
+# actuator应用监控配置
+management:
+  # 配置端点
+  endpoint:
+    health:
+      show-details: ALWAYS # 健康信息端点显示详情
+    shutdown:
+      enabled: true # 开启关闭应用的断点
+
+  # 曝露端点
+  endpoints:
+    web:
+      exposure:
+        include: "*" # 曝露所有端点
+
+logging:
+  level:
+    de.codecentric.boot.admin.server: DEBUG

@@ -1,6 +1,6 @@
 # 服务器信息
 server:
-  address: 192.168.8.100
+  address: 192.168.8.115
   port: 2000
 
 # spring应用信息
@@ -18,6 +18,9 @@ spring:
 
 # eureka配置
 eureka:
+  server:
+    enable-self-preservation: false # 关闭自我保护机制：剔除失效的服务节点
+    eviction-interval-timer-in-ms: 30000 # 清理无效服务节点的时间间隔，默认时60秒
   instance:
     hostname: ${server.address}  # 集群时使用
   client:

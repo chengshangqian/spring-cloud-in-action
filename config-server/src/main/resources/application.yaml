@@ -32,6 +32,21 @@ spring:
 #          username: chengshangqian@126.com
 #          password: github2020
 
+# actuator应用监控配置
+management:
+  # 配置端点
+  endpoint:
+    health:
+      show-details: ALWAYS # 健康信息端点显示详情
+    shutdown:
+      enabled: false # 关闭（默认）应用的端点
+
+  # 曝露端点
+  endpoints:
+    web:
+      exposure:
+        include: "*" # 曝露所有端点
+
 # eureka注册中心配置
 eureka:
   client:

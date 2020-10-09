@@ -25,6 +25,12 @@
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
+        <!-- 解决一些警告提示 -->
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+        </dependency>
+
         <!-- 应用监控actuator起步依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

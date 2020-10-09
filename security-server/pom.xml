@@ -65,24 +65,28 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- security认证授权 -->
+        <!-- 认证授权security起步依赖：oauth2起步依赖也包含了security的起步依赖 -->
+        <!--
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-security</artifactId>
         </dependency>
+        -->
 
-        <!-- oauth2认证授权 -->
+        <!-- 认证授权oauth2起步依赖 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-oauth2</artifactId>
         </dependency>
 
-        <!-- jwt访问令牌 -->
+        <!-- 令牌访问jwt模块：oauth2起步依赖也包含了jwt模块 -->
+        <!--
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-jwt</artifactId>
             <version>1.1.1.RELEASE</version>
         </dependency>
+        -->
 
         <!-- actuator依赖：应用监控 -->
         <dependency>

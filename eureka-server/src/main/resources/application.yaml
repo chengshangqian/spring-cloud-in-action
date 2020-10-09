@@ -24,10 +24,25 @@ eureka:
   instance:
     hostname: ${server.address}  # 集群时使用
   client:
-    register-with-eureka: false  # 否向将自身注册为服务
-    fetch-registry: false  # 是否能从eureka拉取注册信息
+    register-with-eureka: true  # 否向将自身注册为服务：注册为服务，以便spring-boot-admin可以进行健康监控
+    fetch-registry: false  # 是否从eureka拉取注册信息
     serviceUrl:  # 曝露注册中心地址。如果搭建集群，这里填写集群中其它eureka节点的地址，多个用逗号隔开
       defaultZone: http://${server.address}:${server.port}/eureka
+
+# actuator应用监控配置
+management:
+  # 配置端点
+  endpoint:
+    health:
+      show-details: ALWAYS # 健康信息端点显示详情
+    shutdown:
+      enabled: false # 关闭（默认）应用的端点
+
+  # 曝露端点
+  endpoints:
+    web:
+      exposure:
+        include: "*" # 曝露所有端点
 
 # 日志配置
 logging:

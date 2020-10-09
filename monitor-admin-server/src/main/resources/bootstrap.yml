@@ -8,32 +8,32 @@ spring:
   application:
     name: monitor-admin-server
 
-  #cloud:
   # 启用配置中心
-  #    config:
-  #      fail-fast: true # 开启快速失败策略
-  #      discovery: # 使用服务发现
-  #        enabled: true
-  #        serviceId: config-server
+  cloud:
+    config:
+      fail-fast: true # 开启快速失败策略
+      discovery: # 使用服务发现
+        enabled: true
+        serviceId: config-server
 
   profiles:
-    active: dev # 部署产品环境时使用配置中心的pro
+    active: pro # 部署产品环境时使用配置中心的pro
 
 # eureka注册中心配置
 eureka:
   client:
-    registry-fetch-interval-seconds: 5
+    #registry-fetch-interval-seconds: 5 # 开发机性能不够，监控刷新频率可以慢些
     serviceUrl:
       # eureka-server服务注册中心地址，如果是集群，可以用逗号隔开
       defaultZone: http://192.168.8.115:2000/eureka
   instance:
     hostname: ${server.address}
-    lease-renewal-interval-in-seconds: 10
+    #lease-renewal-interval-in-seconds: 10 # 开发机性能不够，容易连接超时
     # 健康检查url
     health-check-url-path: /actuator/health
     # 定义注册到eureka中的服务实例instance-id，在eureka后台显示
     instance-id: ${spring.application.name}:${server.address}:${server.port}
-    # SpringBootAdmin登录账号密码
-    metadata-map:
-      user.name: ${spring.security.user.name}
-      user.password: ${spring.security.user.password}
+    # 启用了spring-security,需要为spring-boot-admin应用本身的监控程序配置认证账号和密码，以便调用对应的健康监控接口/actuator/**，要么设置/actuator/**不进行认证授权
+#    metadata-map:
+#      user.name: mickey # ${spring.security.user.name} # 使用硬编码在内存中的用户账号，如果使用数据库查询，这里只能硬编码，要么监控接口不做安全认证
+#      user.password: 123456 # ${spring.security.user.password}

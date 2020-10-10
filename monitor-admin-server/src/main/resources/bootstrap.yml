@@ -1,6 +1,6 @@
 # 服务器信息
 server:
-  address: 192.168.8.115
+  address: localhost
   port: 5000
 
 # spring应用信息
@@ -25,7 +25,7 @@ eureka:
     #registry-fetch-interval-seconds: 5 # 开发机性能不够，监控刷新频率可以慢些
     serviceUrl:
       # eureka-server服务注册中心地址，如果是集群，可以用逗号隔开
-      defaultZone: http://192.168.8.115:2000/eureka
+      defaultZone: http://localhost:2000/eureka
   instance:
     hostname: ${server.address}
     #lease-renewal-interval-in-seconds: 10 # 开发机性能不够，容易连接超时

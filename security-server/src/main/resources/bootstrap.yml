@@ -1,6 +1,6 @@
 # 服务器信息
 server:
-  address: 192.168.8.115
+  address: localhost
   port: 4000
 
 # spring应用信息
@@ -22,7 +22,7 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://192.168.8.115:2000/eureka
+      defaultZone: http://localhost:2000/eureka
   instance:
     hostname: ${server.address}
     instance-id: ${spring.application.name}:${server.address}:${server.port}

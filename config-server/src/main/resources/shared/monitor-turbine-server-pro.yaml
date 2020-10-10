@@ -24,18 +24,17 @@ management:
         include: "*" # 曝露所有端点
 
 # hystrix配置
-# 被监控应用（user-service）熔断数据流接口的主机列表，否则配置聚合监控面板时（/turbine.stream）无法获取获取监控数据流时将报错
-# 主机地址 + turbine.instance-url-suffix为完成的熔断监控数据流调用接口
 hystrix:
+  # 允许调用数据流/actuator/hystrix.stream或/turbine.stream的主机列表
   dashboard:
-    proxy-stream-allow-list: "*"
+    proxy-stream-allow-list: ${server.address}
 
 # turbine配置：监控应用(服务消费方)的熔断情况
 # 下面的例子，聚合监控user-service和blog-service对日志服务log-service调用的熔断情况
 turbine:
   combine-host-port: true
   app-config: user-service, blog-service, log-service # 多个应用使用逗号隔开
-  cluster-name-expression: new String("default")
+  cluster-name-expression: new String("default") # 集群名称
   aggregator:
     cluster-config: default
   instance-url-suffix: /actuator/hystrix.stream # 调用被监控应用的数据流接口地址，缺省/actuator/hystrix.stream

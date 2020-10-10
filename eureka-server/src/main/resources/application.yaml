@@ -1,6 +1,6 @@
 # 服务器信息
 server:
-  address: 192.168.8.115
+  address: localhost
   port: 2000
 
 # spring应用信息

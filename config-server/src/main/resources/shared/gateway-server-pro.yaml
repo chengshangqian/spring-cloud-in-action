@@ -69,9 +69,24 @@ spring:
             - StripPrefix=2
   # 用于服务限流,储存令牌
   redis:
-    host: 192.168.8.190
+    host: 192.168.8.192
     port: 6379
     database: 0
+
+# actuator应用监控配置
+management:
+  # 配置端点
+  endpoint:
+    health:
+      show-details: ALWAYS # 健康信息端点显示详情
+    shutdown:
+      enabled: false # 关闭（默认）应用的端点
+
+  # 曝露端点
+  endpoints:
+    web:
+      exposure:
+        include: "*" # 曝露所有端点
 
 logging:
   level:

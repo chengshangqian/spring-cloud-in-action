@@ -1,6 +1,6 @@
 # 服务器信息
 server:
-  address: 192.168.8.115
+  address: localhost
   port: 80
 
 # spring应用信息
@@ -29,4 +29,4 @@ eureka:
   client:
     serviceUrl:
       # 注册中心地址，集群(多个)的话用逗号隔开
-      defaultZone: http://192.168.8.115:2000/eureka
+      defaultZone: http://localhost:2000/eureka

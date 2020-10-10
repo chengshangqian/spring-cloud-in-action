@@ -1,6 +1,6 @@
 # 服务器信息
 server:
-  address: 192.168.8.115
+  address: localhost
   port: 8020
 
 # spring应用信息
@@ -24,7 +24,7 @@ eureka:
   client:
     registry-fetch-interval-seconds: 10 # 消费者配置：从注册中心拉取服务列表的间隔时间，默认30秒，即每间隔30秒从注册中心拉取一次服务列表
     serviceUrl:
-      defaultZone: http://192.168.8.115:2000/eureka
+      defaultZone: http://localhost:2000/eureka
   instance:
     hostname: ${server.address}
     instance-id: ${spring.application.name}:${server.address}:${server.port}

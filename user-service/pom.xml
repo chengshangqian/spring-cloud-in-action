@@ -12,6 +12,10 @@
 
     <artifactId>user-service</artifactId>
 
+    <properties>
+        <swagger.version>3.0.0</swagger.version>
+    </properties>
+
     <dependencies>
         <!-- 公共模块 -->
         <dependency>
@@ -110,6 +114,26 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
+        </dependency>
+
+        <!-- swagger2依赖,适合2.x版本 ：Restful API 在线文档 -->
+        <!--
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        -->
+        <!-- swagger2起步依赖,适合3.x版本 ：Restful API 在线文档 -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>${swagger.version}</version>
         </dependency>
     </dependencies>
 

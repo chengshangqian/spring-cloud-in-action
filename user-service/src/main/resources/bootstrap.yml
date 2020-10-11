@@ -19,6 +19,10 @@ spring:
   profiles:
     active: pro # 部署产品环境时使用配置中心的pro
 
+# swagger开关设置：产品环境应该关闭
+swagger:
+  enabled: true
+
 # eureka配置
 eureka:
   client:

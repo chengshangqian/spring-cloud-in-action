@@ -5,11 +5,13 @@ import com.fandou.coffee.learning.springcloud.common.model.Role;
 import com.fandou.coffee.learning.springcloud.user.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/roles")
+@ApiIgnore("内部使用") // 不生成api文档
 public class RoleController {
 
     @Autowired

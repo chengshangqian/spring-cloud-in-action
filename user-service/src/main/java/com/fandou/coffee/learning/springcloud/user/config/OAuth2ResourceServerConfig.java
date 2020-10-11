@@ -37,10 +37,12 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
         http
                 // 认证授权规则
                 .authorizeRequests(authorizeRequestsCustomizer -> authorizeRequestsCustomizer
-                        // 认证登录、应用监控等不需要认证
+                        //.anyRequest().permitAll()
+                        // 认证登录、应用监控、在线API文档等不需要认证
                         .antMatchers("/authorize").permitAll()
                         .antMatchers("/actuator/**").permitAll()
                         .antMatchers("/webjars/**", "/proxy.stream", "/hystrix", "/hystrix/**").permitAll()
+                        .antMatchers("/swagger**/**","/v3/**").permitAll()
                         .antMatchers("/favicon.ico").permitAll()
                         // 其它请求需要认证
                         .anyRequest().authenticated()

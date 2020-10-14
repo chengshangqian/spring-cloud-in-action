@@ -15,7 +15,7 @@ public interface JwtAuthorizationService {
     /**
      * 申请授权：申请访问令牌
      *
-     * @param userServiceAuthorization Authorization头部，携带的是被保护资源即用户服务(user-service)客户端在安全认证授权服务器上
+     * @param clientDetailsAuthorization Authorization头部，携带的是被保护资源即用户服务(user-service)客户端在安全认证授权服务器上
      *                                       注册的认证信息，包括client_id和client_secret等
      *
      * @param type
@@ -24,7 +24,7 @@ public interface JwtAuthorizationService {
      * @return
      */
     @PostMapping("/oauth/token")
-    AccessToken getJwtAccessToken(@RequestHeader("Authorization") String userServiceAuthorization
+    AccessToken getJwtAccessToken(@RequestHeader("Authorization") String clientDetailsAuthorization
             , @RequestParam("grant_type") String type
             , @RequestParam("username") String username
             , @RequestParam("password") String password);

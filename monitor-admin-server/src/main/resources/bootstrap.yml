@@ -37,3 +37,20 @@ eureka:
 #    metadata-map:
 #      user.name: mickey # ${spring.security.user.name} # 使用硬编码在内存中的用户账号，如果使用数据库查询，这里只能硬编码，要么监控接口不做安全认证
 #      user.password: 123456 # ${spring.security.user.password}
+
+# actuator应用监控配置
+management:
+  # 配置端点
+  endpoint:
+    health:
+      show-details: ALWAYS # 健康信息端点显示详情
+    shutdown:
+      enabled: true # 开启关闭应用的断点
+  # 曝露端点
+  endpoints:
+    web:
+      exposure:
+        include: "*" # 曝露所有端点
+
+logging:
+  file: D:/tmp/logs/spring-cloud-learning/${spring.application.name}.log

@@ -8,6 +8,8 @@ import com.fandou.coffee.learning.springcloud.user.service.JwtAuthorizationServi
 import com.fandou.coffee.learning.springcloud.user.service.AuthorizationService;
 import com.fandou.coffee.learning.springcloud.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,7 @@ import java.nio.charset.Charset;
 import java.util.Base64;
 
 @Service
+@RefreshScope // 刷新配置
 public class AuthorizationServiceImpl implements AuthorizationService {
 
     @Autowired
@@ -25,6 +28,18 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
     @Autowired
     private JwtAuthorizationService jwtAuthorizationService;
+
+    @Value("${app.security.oauth2.client-id}")
+    private String clientId;
+
+    @Value("${app.security.oauth2.client-secret}")
+    private String clientSecret;
+
+    @Value("${app.security.oauth2.authorization-type}")
+    private String authorizationType;
+
+    @Value("${app.security.oauth2.grant-type}")
+    private String grantType;
 
     @Override
     public AuthorizationUser authorize(String username, String password) {
@@ -41,15 +56,12 @@ public class AuthorizationServiceImpl implements AuthorizationService {
         }
 
         // 如果用户存在，将请求授权服务器，为登录的用户申请用户服务授权（jwt访问令牌）
-        // TODO 这些参数应该做成配置文件或数据库中
-        String clientId = "user-service"; // 用户服务在授权服务器上注册的id
-        String clientSecret = "123456"; // 用户服务在授权服务器上注册的认证密码
-        String authorizationToken = Base64.getEncoder().encodeToString((clientId+":"+clientSecret).getBytes(Charset.forName("UTF-8")));
-        String userServiceAuthorization = "Basic " + authorizationToken; // 将用户服务授权信息封装为认证请求头部
-        String grantType = "password"; // 认证授权类型：在授权服务器上配置了refresh_token（刷新令牌）和password（密码方式认证授权）
+        String clientDetails = String.format("%s:%s",clientId,clientSecret);
+        String clientDetailsToken = Base64.getEncoder().encodeToString(clientDetails.getBytes(Charset.forName("UTF-8")));
+        String clientDetailsAuthorization = String.format("%s %s",authorizationType,clientDetailsToken); // 将用户服务授权信息封装为认证请求头部
 
         // 获取jwt访问令牌
-        AccessToken jwtAccessToken = jwtAuthorizationService.getJwtAccessToken(userServiceAuthorization,grantType,username,password);
+        AccessToken jwtAccessToken = jwtAuthorizationService.getJwtAccessToken(clientDetailsAuthorization,grantType,username,password);
 
         // 获取失败或服务不可用（熔断）
         if(jwtAccessToken == null){

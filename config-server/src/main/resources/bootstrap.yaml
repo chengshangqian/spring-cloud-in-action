@@ -57,3 +57,6 @@ eureka:
     hostname: ${server.address}
     # 定义注册到eureka中的服务实例instance-id，在eureka后台显示
     instance-id: ${spring.application.name}:${server.address}:${server.port}
+
+logging:
+  file: D:/tmp/logs/spring-cloud-learning/${spring.application.name}.log

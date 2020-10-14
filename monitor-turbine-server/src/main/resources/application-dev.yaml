@@ -2,30 +2,15 @@
 spring:
   # cloud设置
   cloud:
-    # 负载均衡：关闭负载均衡器ribbon选项，因为ribbon也包含了负载均衡器，两个有冲突?
-    # 会导致无法调用或转发服务请求
+    config:
+      override-none: true # 本地配置覆盖远程节点即配置中心的配置，如果存在相同属性
     loadbalancer:
       ribbon:
-        enabled: false
-
-# actuator应用监控配置
-management:
-  # 配置端点
-  endpoint:
-    health:
-      show-details: ALWAYS # 健康信息端点显示详情
-    shutdown:
-      enabled: false # 关闭（默认）应用的端点
-
-  # 曝露端点
-  endpoints:
-    web:
-      exposure:
-        include: "*" # 曝露所有端点
+        enabled: false # 关闭负载均衡器的ribbon，解决一些警告
 
 # hystrix配置
 hystrix:
-  # 允许调用数据流/actuator/hystrix.stream的主机列表
+  # 允许调用数据流/actuator/hystrix.stream或/turbine.stream的主机列表
   dashboard:
     proxy-stream-allow-list: ${server.address}
 
@@ -34,11 +19,7 @@ hystrix:
 turbine:
   combine-host-port: true
   app-config: user-service, blog-service, log-service # 多个应用使用逗号隔开
-  cluster-name-expression: new String("default")
+  cluster-name-expression: new String("default") # 集群名称
   aggregator:
     cluster-config: default
   instance-url-suffix: /actuator/hystrix.stream # 调用被监控应用的数据流接口地址，缺省/actuator/hystrix.stream
-
-logging:
-  level:
-    org.springframework.cloud.netflix: DEBUG

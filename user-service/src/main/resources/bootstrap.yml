@@ -35,3 +35,21 @@ eureka:
 #    lease-renewal-interval-in-seconds: 10 # 提供者配置：服务续约间隔时间，默认30秒，即每间隔30秒将向注册中心发起一次续约
 #    lease-expiration-duration-in-seconds: 30 # 提供者配置：服务失效超时时间，默认90秒，即续约超时90秒后，服务将从注册中心剔除
     health-check-url-path: /actuator/health
+
+# actuator应用监控配置
+management:
+  # 配置端点
+  endpoint:
+    health:
+      show-details: ALWAYS # 健康信息端点显示详情
+    shutdown:
+      enabled: false # 关闭（默认）应用的端点
+
+  # 曝露端点
+  endpoints:
+    web:
+      exposure:
+        include: "*" # 曝露所有端点
+
+logging:
+  file: D:/tmp/logs/spring-cloud-learning/${spring.application.name}.log

@@ -5,6 +5,8 @@ import com.fandou.coffee.learning.springcloud.common.model.User;
 import com.fandou.coffee.learning.springcloud.user.model.UserBlogDTO;
 import com.fandou.coffee.learning.springcloud.user.service.UserService;
 import io.swagger.annotations.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
@@ -19,6 +21,9 @@ import java.util.List;
 @RequestMapping("/users")
 @Api(tags = "用户服务",produces = "application/json",protocols = "http,https") // 定义用户服务API，默认均返回json格式，支持http,https协议的调用
 public class UserController {
+
+    // 日志
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
@@ -222,13 +227,17 @@ public class UserController {
         )
     })
     @GetMapping("/api/v1/{id}")
-    public HttpResult<User> api1(@PathVariable("id") Integer id,
+    public HttpResult<User> apiDemo(@PathVariable("id") Integer id,
                                      @RequestHeader("jwtToken") String accessToken,
                                      @RequestParam("username") String username,
                                      @CookieValue("rmb-me") String rmb, // 页面不支持显示cookie类型
                                      @RequestBody User user
                                      ) {
-        System.out.println("测试");
+
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("测试...");
+        }
+
         return HttpResult.success(user);
     }
 }

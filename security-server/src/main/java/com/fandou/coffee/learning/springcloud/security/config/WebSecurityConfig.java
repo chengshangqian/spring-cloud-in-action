@@ -25,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 // 认证授权规则
                 .authorizeRequests(authorizeRequestsCustomizer -> authorizeRequestsCustomizer
-                        .antMatchers("/actuator/**","/error").permitAll()
+                        .antMatchers("/actuator/**","/oauth2/clientdetails/**","/error").permitAll()
                         // 缺省所有请求需要认证
                         .anyRequest().authenticated()
                 )

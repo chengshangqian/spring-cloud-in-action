@@ -1,19 +1,22 @@
 package com.fandou.coffee.learning.springcloud.security.service;
 
-import com.fandou.coffee.learning.springcloud.security.dao.UserDao;
+import com.fandou.coffee.learning.springcloud.security.dao.UserAuthenticationDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+/**
+ * 用户认证服务
+ */
 @Service
-public class UserService implements UserDetailsService {
+public class UserAuthenticationService implements UserDetailsService {
     @Autowired
-    private UserDao userDao;
+    private UserAuthenticationDao userAuthenticationDao;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userDao.getByUsername(username);
+        return userAuthenticationDao.getByUsername(username);
     }
 }

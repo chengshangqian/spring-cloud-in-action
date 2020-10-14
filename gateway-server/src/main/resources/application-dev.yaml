@@ -2,11 +2,11 @@
 spring:
   # cloud设置
   cloud:
-    # 负载均衡：关闭负载均衡器ribbon选项，因为ribbon也包含了负载均衡器，两个有冲突?
-    # 会导致无法调用或转发服务请求
+    config:
+      override-none: true # 本地配置覆盖远程节点即配置中心的配置，如果存在相同属性
     loadbalancer:
       ribbon:
-        enabled: false
+        enabled: false # 关闭负载均衡器的ribbon，解决一些警告
     # gateway网关设置
     gateway:
       # 使用服务发现
@@ -69,25 +69,12 @@ spring:
             - StripPrefix=2
   # 用于服务限流,储存令牌
   redis:
-    host: 192.168.8.194
+    host: localhost
     port: 6379
     database: 0
-
-# actuator应用监控配置
-management:
-  # 配置端点
-  endpoint:
-    health:
-      show-details: ALWAYS # 健康信息端点显示详情
-    shutdown:
-      enabled: false # 关闭（默认）应用的端点
-
-  # 曝露端点
-  endpoints:
-    web:
-      exposure:
-        include: "*" # 曝露所有端点
-
-logging:
-  level:
-    org.springframework.cloud.gateway: DEBUG
+    lettuce:
+      pool:
+        max-wait: 100000
+        max-idle: 10
+        max-active: 100
+    timeout: 5000

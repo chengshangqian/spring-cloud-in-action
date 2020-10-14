@@ -1,40 +1,22 @@
 # spring应用信息
 spring:
-  #security安全配置：账号密码配置在内存，一般会放在数据库中管理
-#  security:
-#    user:
-#      name: admin
-#      password: 123456
+  # cloud设置
+  cloud:
+    config:
+      override-none: true # 本地配置覆盖远程节点即配置中心的配置，如果存在相同属性
+    loadbalancer:
+      ribbon:
+        enabled: false # 关闭负载均衡器的ribbon，解决一些警告
   # 配置数据源
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    address: 192.168.8.194:3306
+    address: localhost:3306
     url: jdbc:mysql://${spring.datasource.address}/vblog?useUnicode=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&characterEncoding=utf-8
     username: coffee
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
-  # cloud设置
-  cloud:
-    # 负载均衡：关闭负载均衡器ribbon选项，因为ribbon也包含了负载均衡器，两个有冲突?
-    # 会导致无法调用或转发服务请求
-    loadbalancer:
-      ribbon:
-        enabled: false
-
-# actuator应用监控配置
-management:
-  # 配置端点
-  endpoint:
-    health:
-      show-details: ALWAYS # 健康信息端点显示详情
-    shutdown:
-      enabled: true # 开启关闭应用的断点
-  # 曝露端点
-  endpoints:
-    web:
-      exposure:
-        include: "*" # 曝露所有端点
-
-logging:
-  level:
-    de.codecentric.boot.admin.server: DEBUG
+  #security安全配置：账号密码配置在内存，一般会放在数据库中管理
+  #  security:
+  #    user:
+  #      name: admin
+  #      password: 123456

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class JwtAuthorizationServiceMock implements JwtAuthorizationService {
 
     @Override
-    public AccessToken getJwtAccessToken(String userServiceAuthorization, String type, String username, String password) {
+    public AccessToken getJwtAccessToken(String clientDetailsAuthorization, String type, String username, String password) {
         return null;
     }
 }

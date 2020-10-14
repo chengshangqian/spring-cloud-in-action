@@ -30,3 +30,21 @@ eureka:
     serviceUrl:
       # 注册中心地址，集群(多个)的话用逗号隔开
       defaultZone: http://localhost:2000/eureka
+
+# actuator应用监控配置
+management:
+  # 配置端点
+  endpoint:
+    health:
+      show-details: ALWAYS # 健康信息端点显示详情
+    shutdown:
+      enabled: false # 关闭（默认）应用的端点
+
+  # 曝露端点
+  endpoints:
+    web:
+      exposure:
+        include: "*" # 曝露所有端点
+
+logging:
+  file: D:/tmp/logs/spring-cloud-learning/${spring.application.name}.log

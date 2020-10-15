@@ -1,0 +1,51 @@
+# 服务器信息
+server:
+  address: localhost
+  port: 80
+
+# spring应用信息
+spring:
+  application:
+    name: zuul-server
+
+
+  # 启用配置中心
+#  cloud:
+#    config:
+#      fail-fast: true # 开启快速失败策略
+#      discovery: # 使用服务发现
+#        enabled: true
+#        serviceId: config-server
+
+  profiles:
+    active: dev # 部署产品环境时使用配置中心的pro：需引入config依赖
+
+# eureka注册中心配置
+eureka:
+  # eureka服务实例配置
+  instance:
+    hostname: ${server.address}
+    instance-id: ${spring.application.name}:${server.address}:${server.port}
+  # eureka注册中心配置
+  client:
+    serviceUrl:
+      # 注册中心地址，集群(多个)的话用逗号隔开
+      defaultZone: http://localhost:2000/eureka
+
+# actuator应用监控配置
+management:
+  # 配置端点
+  endpoint:
+    health:
+      show-details: ALWAYS # 健康信息端点显示详情
+    shutdown:
+      enabled: false # 关闭（默认）应用的端点
+
+  # 曝露端点
+  endpoints:
+    web:
+      exposure:
+        include: "*" # 曝露所有端点
+
+logging:
+  file: D:/tmp/logs/spring-cloud-learning/${spring.application.name}.log

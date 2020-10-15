@@ -1,0 +1,45 @@
+# hystrix熔断配置
+hystrix:
+  command:
+    default: # 缺省匹配所有的熔断器，可以定义路由中配置的熔断器名称来指定具体的路由的熔断配置
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000 # 超时20秒启动熔断器
+
+# ribbon负载均衡配置
+ribbon:
+  ReadTimeout: 20000
+  ConnectTimeout: 20000
+
+# zuul路由网关配置
+zuul:
+  # 配置全局的前缀/api/v1
+  prefix: /api/v1
+  routes:
+    # /eureka开头的请求路由到eureka-server：全局前缀/api/v1以及/eureka在执行路由时会被截取掉，即/**部分为eureka-server服务的真实api路径
+    eureka:
+      path: /eureka/**
+      serviceId: eureka-server
+      sensitiveHeaders: # 置空sensitiveHeaders属性，让请求安全头的敏感信息可以转发，以完成后端服务中的安全认证
+    # /monitor/admin开头的请求路由到monitor-admin-server
+    monitor-admin:
+      path: /monitor/admin/**
+      serviceId: monitor-admin-server
+      sensitiveHeaders:
+    monitor-turbine:
+      path: /monitor/turbine/**
+      serviceId: monitor-turbine-server
+      sensitiveHeaders:
+    user-service:
+      path: /u/**
+      serviceId: user-service
+      sensitiveHeaders:
+    blog-service:
+      path: /b/**
+      serviceId: blog-service
+      sensitiveHeaders:
+    log-service:
+      path: /l/**
+      serviceId: log-service
+      sensitiveHeaders:

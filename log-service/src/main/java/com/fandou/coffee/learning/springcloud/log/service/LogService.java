@@ -6,7 +6,7 @@ import com.fandou.coffee.learning.springcloud.common.result.HttpResult;
 
 import java.util.List;
 
-public interface LogService {
+public interface LogService extends com.fandou.coffee.learning.springcloud.common.service.LogService {
     HttpResult<List<Blog>> getBlogs(String accessToken, String username);
     HttpResult<User> getUser(String accessToken, String username);
 }

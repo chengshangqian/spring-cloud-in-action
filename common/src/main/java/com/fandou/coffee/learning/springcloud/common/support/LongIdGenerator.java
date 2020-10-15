@@ -1,4 +1,4 @@
-package com.fandou.coffee.learning.springcloud.security.support;
+package com.fandou.coffee.learning.springcloud.common.support;
 
 import org.springframework.data.redis.core.RedisTemplate;
 

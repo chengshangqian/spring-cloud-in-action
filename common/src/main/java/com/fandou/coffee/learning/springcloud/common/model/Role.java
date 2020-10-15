@@ -9,7 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 @Data
 public class Role implements GrantedAuthority{
     // 序列化id
-    private static final long serialVersionUID = -1000003L;
+    private static final long serialVersionUID = -1000004L;
 
     // 角色id
     private int id;

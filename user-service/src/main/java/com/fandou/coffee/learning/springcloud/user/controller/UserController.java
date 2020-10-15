@@ -4,6 +4,7 @@ import com.fandou.coffee.learning.springcloud.common.result.HttpResult;
 import com.fandou.coffee.learning.springcloud.common.model.User;
 import com.fandou.coffee.learning.springcloud.user.model.UserBlogDTO;
 import com.fandou.coffee.learning.springcloud.user.service.UserService;
+import com.fandou.coffee.learning.springcloud.common.support.DoLog;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +42,7 @@ public class UserController {
     @ApiResponses({
         @ApiResponse(code = 200, message = "操作成功，返回用户详细信息。如果用户不存在，将返回空")
     })
+    @DoLog("获取用户")
     @GetMapping("/{id}")
     public HttpResult<User> get(@PathVariable("id") Integer id) {
         User user = userService.get(id);
@@ -60,6 +62,7 @@ public class UserController {
     @ApiResponses({
         @ApiResponse(code = 200, message = "操作成功，返回用户user和博客列表blogs，如果用户未发表过博客，博客列表blogs为空")
     })
+    @DoLog("用户博客")
     @PostMapping("/blogs/{username}")
     public HttpResult<UserBlogDTO> getBlogs(@PathVariable("username") String username) {
         UserBlogDTO userBlogDTO = userService.getBlogs(username);
@@ -79,6 +82,7 @@ public class UserController {
     @ApiResponses({
         @ApiResponse(code = 200, message = "操作成功，返回用户详细信息")
     })
+    @DoLog("用户详情")
     @PostMapping("/{username}")
     public HttpResult<User> getByUsername(@PathVariable("username") String username) {
         User user = userService.getByUsername(username);
@@ -95,6 +99,7 @@ public class UserController {
     @ApiResponses({
         @ApiResponse(code = 200, message = "操作成功，返回用户的认证主体信息principal")
     })
+    @DoLog("当前用户")
     @GetMapping("/current")
     public HttpResult<Principal> get(@ApiIgnore("不需要调用者传入") Principal principal) {
         return HttpResult.success(principal);
@@ -109,6 +114,7 @@ public class UserController {
     @ApiResponses({
         @ApiResponse(code = 200, message = "操作成功，返回用户列表")
     })
+    @DoLog("用户列表")
     @GetMapping
     public HttpResult<List<User>> list() {
         List<User> users = userService.list();
@@ -125,6 +131,7 @@ public class UserController {
     @ApiResponses({
         @ApiResponse(code = 200, message = "操作成功，返回操作成功的记录条数")
     })
+    @DoLog("创建用户")
     @PostMapping
     public HttpResult<Integer> create(@RequestBody User user) {
         Integer count = userService.create(user);
@@ -141,6 +148,7 @@ public class UserController {
     @ApiResponses({
         @ApiResponse(code = 200, message = "操作成功，返回操作成功的记录条数")
     })
+    @DoLog("更新用户")
     @PutMapping
     public HttpResult<Integer> update(@RequestBody User user) {
         Integer count = userService.update(user);
@@ -157,6 +165,7 @@ public class UserController {
     @ApiResponses({
         @ApiResponse(code = 200, message = "操作成功，返回操作成功的记录条数")
     })
+    @DoLog("更新密码")
     @PutMapping("/password")
     public HttpResult<Integer> updatePassword(@RequestBody User user) {
         Integer count = userService.updatePassword(user);
@@ -176,6 +185,7 @@ public class UserController {
     @ApiResponses({
         @ApiResponse(code = 200, message = "操作成功，返回操作成功的记录条数")
     })
+    @DoLog("删除用户")
     @DeleteMapping("/{id}")
     public HttpResult<Integer> delete(@PathVariable("id") Integer id) {
         Integer count = userService.delete(id);

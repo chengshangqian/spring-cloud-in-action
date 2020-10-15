@@ -15,6 +15,14 @@ spring:
     username: coffee
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
+  # rabbitmq消息设置
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: sqcheng
+    password: 123456
+    publisher-confirm-type: CORRELATED
+    virtual-host: /
 
 # feign配置：远程调用开启熔断功能，否则fallback指定的Mock无法启用，另外需要注意首次调用超时问题
 feign:

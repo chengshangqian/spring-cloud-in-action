@@ -1,7 +1,7 @@
 package com.fandou.coffee.learning.springcloud.security.controller;
 
 import com.fandou.coffee.learning.springcloud.common.result.HttpResult;
-import com.fandou.coffee.learning.springcloud.security.support.IdGenerator;
+import com.fandou.coffee.learning.springcloud.common.support.IdGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

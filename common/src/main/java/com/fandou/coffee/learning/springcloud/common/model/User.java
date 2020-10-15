@@ -9,7 +9,7 @@ import java.util.Objects;
 @Data
 public class User implements UserDetails {
     // 序列化id
-    private static final long serialVersionUID = -1000004L;
+    private static final long serialVersionUID = -1000005L;
 
     // 用户id
     private int id;

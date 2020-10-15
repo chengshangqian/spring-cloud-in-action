@@ -1,5 +1,6 @@
-package com.fandou.coffee.learning.springcloud.security.config;
+package com.fandou.coffee.learning.springcloud.log.config;
 
+import com.fandou.coffee.learning.springcloud.common.support.IdGenerator;
 import com.fandou.coffee.learning.springcloud.common.support.LongIdGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +14,7 @@ public class RedisConfig {
     private RedisTemplate redisTemplate;
 
     @Bean
-    public LongIdGenerator idGenerator(){
+    public IdGenerator idGenerator(){
         return new LongIdGenerator(redisTemplate);
     }
 }

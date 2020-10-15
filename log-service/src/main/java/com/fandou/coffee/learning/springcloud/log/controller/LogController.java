@@ -1,11 +1,12 @@
 package com.fandou.coffee.learning.springcloud.log.controller;
 
 import com.fandou.coffee.learning.springcloud.common.model.Blog;
+import com.fandou.coffee.learning.springcloud.common.model.Log;
 import com.fandou.coffee.learning.springcloud.common.model.User;
 import com.fandou.coffee.learning.springcloud.common.result.HttpResult;
-import com.fandou.coffee.learning.springcloud.log.service.BlogService;
 import com.fandou.coffee.learning.springcloud.log.service.LogService;
-import com.fandou.coffee.learning.springcloud.log.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/logs")
 public class LogController {
+    // 日志
+    private static final Logger LOGGER = LoggerFactory.getLogger(LogController.class);
+
     @Autowired
     private LogService logService;
 
@@ -28,8 +32,12 @@ public class LogController {
      */
     @PostMapping("/blogs/{username}")
     public HttpResult<List<Blog>> getBlogs(@RequestHeader(value = "Authorization") String accessToken,@PathVariable("username") String username) {
-        System.out.println("getBlogs::Authorization => " + accessToken);
-        System.out.println("getBlogs::username => " + username);
+
+        if(LOGGER.isDebugEnabled()){
+            LOGGER.debug("getBlogs::Authorization => ：{}",accessToken);
+            LOGGER.debug("getBlogs::username => ：{}",username);
+        }
+
         return logService.getBlogs(accessToken,username);
     }
 
@@ -41,8 +49,37 @@ public class LogController {
      */
     @PostMapping("/user/{username}")
     public HttpResult<User> getUser(@RequestHeader(value = "Authorization") String accessToken, @PathVariable("username") String username) {
-        System.out.println("getUser::Authorization => " + accessToken);
-        System.out.println("getUser::username => " + username);
+
+        if(LOGGER.isDebugEnabled()){
+            LOGGER.debug("getUser::Authorization => ：{}",accessToken);
+            LOGGER.debug("getUser::username => ：{}",username);
+        }
+
         return logService.getUser(accessToken,username);
+    }
+
+    @GetMapping("/{id}")
+    public HttpResult<Log> get(@RequestParam("id") Long id) {
+        return HttpResult.success(logService.get(id));
+    }
+
+    @GetMapping
+    public HttpResult<List<Log>> list() {
+        return HttpResult.success(logService.list());
+    }
+
+    @PostMapping
+    public HttpResult<Integer> create(@RequestBody Log log) {
+        return HttpResult.success(logService.create(log));
+    }
+
+    @PutMapping
+    public HttpResult<Integer> update(@RequestBody Log log) {
+        return HttpResult.success(logService.update(log));
+    }
+
+    @DeleteMapping("/{id}")
+    public HttpResult<Integer> delete(@RequestParam("id") Long id) {
+        return HttpResult.success(logService.delete(id));
     }
 }

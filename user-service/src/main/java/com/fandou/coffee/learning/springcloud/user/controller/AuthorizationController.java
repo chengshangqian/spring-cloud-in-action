@@ -3,6 +3,7 @@ package com.fandou.coffee.learning.springcloud.user.controller;
 import com.fandou.coffee.learning.springcloud.common.result.HttpResult;
 import com.fandou.coffee.learning.springcloud.common.model.AuthorizationUser;
 import com.fandou.coffee.learning.springcloud.user.service.AuthorizationService;
+import com.fandou.coffee.learning.springcloud.common.support.DoLog;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,6 +35,7 @@ public class AuthorizationController {
     @ApiResponses({
         @ApiResponse(code = 200, message = "操作成功，返回封装了认证用户信息的Http结果对象")
     })
+    @DoLog("认证登录")
     @PostMapping("/authorize")
     public HttpResult<AuthorizationUser> authorize(@RequestParam("username") String username, @RequestParam("password") String password){
         AuthorizationUser authorizationUser = authorizationService.authorize(username, password);

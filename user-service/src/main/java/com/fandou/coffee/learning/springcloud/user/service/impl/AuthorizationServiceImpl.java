@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 @Service
@@ -57,7 +58,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
         // 如果用户存在，将请求授权服务器，为登录的用户申请用户服务授权（jwt访问令牌）
         String clientDetails = String.format("%s:%s",clientId,clientSecret);
-        String clientDetailsToken = Base64.getEncoder().encodeToString(clientDetails.getBytes(Charset.forName("UTF-8")));
+        String clientDetailsToken = Base64.getEncoder().encodeToString(clientDetails.getBytes(StandardCharsets.UTF_8));
         String clientDetailsAuthorization = String.format("%s %s",authorizationType,clientDetailsToken); // 将用户服务授权信息封装为认证请求头部
 
         // 获取jwt访问令牌

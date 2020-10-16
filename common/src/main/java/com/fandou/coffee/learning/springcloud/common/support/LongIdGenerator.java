@@ -7,7 +7,7 @@ import org.springframework.data.redis.core.RedisTemplate;
  */
 public class LongIdGenerator implements IdGenerator {
 
-    private RedisTemplate redisTemplate;
+    private final RedisTemplate redisTemplate;
 
     public LongIdGenerator(RedisTemplate redisTemplate){
         this.redisTemplate = redisTemplate;

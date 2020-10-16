@@ -14,8 +14,8 @@ public enum ExceptionCode {
     TOKEN_IS_NOT_MATCH_USER(1003,"请使用自己的token进行接口请求"),
     BLOG_IS_NOT_EXIST(2001,"该博客不存在");
 
-    private int code;
-    private String message;
+    private final int code;
+    private final String message;
 
     ExceptionCode(int code, String message) {
         this.code = code;

@@ -5,7 +5,7 @@ package com.fandou.coffee.learning.springcloud.common.exception;
  */
 public class BaseException extends RuntimeException {
 
-    private ExceptionCode exceptionCode;
+    private final ExceptionCode exceptionCode;
 
     public BaseException(ExceptionCode exceptionCode) {
         super(exceptionCode.getMessage());

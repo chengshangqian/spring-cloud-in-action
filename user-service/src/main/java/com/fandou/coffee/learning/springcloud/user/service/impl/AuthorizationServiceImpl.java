@@ -2,10 +2,10 @@ package com.fandou.coffee.learning.springcloud.user.service.impl;
 
 import com.fandou.coffee.learning.springcloud.common.exception.AuthorizationException;
 import com.fandou.coffee.learning.springcloud.common.model.AccessToken;
-import com.fandou.coffee.learning.springcloud.common.model.User;
 import com.fandou.coffee.learning.springcloud.common.model.AuthorizationUser;
-import com.fandou.coffee.learning.springcloud.user.service.JwtAuthorizationService;
+import com.fandou.coffee.learning.springcloud.common.model.User;
 import com.fandou.coffee.learning.springcloud.user.service.AuthorizationService;
+import com.fandou.coffee.learning.springcloud.user.service.JwtAuthorizationService;
 import com.fandou.coffee.learning.springcloud.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,7 +13,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 

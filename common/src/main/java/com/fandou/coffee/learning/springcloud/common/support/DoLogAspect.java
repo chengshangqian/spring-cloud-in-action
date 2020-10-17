@@ -22,7 +22,7 @@ public class DoLogAspect {
     // 日志
     private static final Logger LOGGER = LoggerFactory.getLogger(DoLogAspect.class);
 
-    private MessageSender messageSender; // defaultMessageSender
+    private final MessageSender messageSender; // defaultMessageSender
 
     public DoLogAspect(MessageSender messageSender){
         this.messageSender = messageSender;

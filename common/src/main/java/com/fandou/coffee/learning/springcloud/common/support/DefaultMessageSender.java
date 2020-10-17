@@ -6,9 +6,9 @@ import org.springframework.amqp.core.AmqpTemplate;
 
 public class DefaultMessageSender implements MessageSender<Object> {
 
-    private AmqpTemplate amqpTemplate;
+    private final AmqpTemplate amqpTemplate;
 
-    private String queue;
+    private final String queue;
 
     public DefaultMessageSender(AmqpTemplate amqpTemplate){
         this(amqpTemplate,MessageConstants.DEFAULT_QUEUE);

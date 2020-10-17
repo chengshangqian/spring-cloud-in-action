@@ -15,9 +15,9 @@ public class DefaultMessageReceiver implements MessageReceiver {
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultMessageReceiver.class);
 
     // 栈栏
-    private CountDownLatch latch = new CountDownLatch(1);
+    private final CountDownLatch latch = new CountDownLatch(1);
 
-    private LogService logService;
+    private final LogService logService;
 
     public DefaultMessageReceiver(LogService logService) {
         assert null != logService;

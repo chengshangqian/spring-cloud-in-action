@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.fandou.coffee.learning</groupId>
+    <artifactId>spring-cloud-in-action</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <description>SpringCloud项目实战</description>
+
+    <modules>
+        <module>pom-parent</module>
+        <module>eureka-server</module>
+        <module>gateway-server</module>
+        <module>gateway-zuul-server</module>
+        <module>config-server</module>
+        <module>monitor-admin-server</module>
+        <module>monitor-turbine-server</module>
+        <module>common</module>
+        <module>security-server</module>
+        <module>user-service</module>
+        <module>blog-service</module>
+        <module>log-service</module>
+    </modules>
+    
+</project>

@@ -59,4 +59,4 @@ eureka:
     instance-id: ${spring.application.name}:${server.address}:${server.port}
 
 logging:
-  file: D:/tmp/logs/spring-cloud-learning/${spring.application.name}.log
+  file: logs/spring-cloud-in-action/${spring.application.name}.log

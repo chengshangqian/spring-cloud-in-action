@@ -52,4 +52,4 @@ management:
         include: "*" # 曝露所有端点
 
 logging:
-  file: D:/tmp/logs/spring-cloud-learning/${spring.application.name}.log
+  file: logs/spring-cloud-in-action/${spring.application.name}.log
